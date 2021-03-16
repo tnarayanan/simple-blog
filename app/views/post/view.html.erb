@@ -1,0 +1,15 @@
+<div class="body">
+<p><%= link_to "Back", '/' %></p>
+
+<% Post.all.order("created_at DESC").each do |post| %>
+  <% if post.key == params[:key] %>
+    <div class="title">
+      <h1><%= post.title %></h1>
+    </div>
+
+    <h3 style="text-align: center">by <%= post.author %> (<%= post.email %>)</h3>
+
+    <p id="view-post-body"><%= post.body %></p>
+  <% end %>
+<% end %>
+</div>

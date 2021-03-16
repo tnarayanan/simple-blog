@@ -1,0 +1,53 @@
+<div class="body">
+<% if current_user %>
+  Logged in as <%= current_user.email %>.
+  <%= link_to "Log Out", logout_path %>
+<% else %>
+  <%= link_to "Sign Up", signup_path %> or
+  <%= link_to "Log In", login_path %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="wrapper">
+  <div class="title">
+    <h1>Simple Ruby on Rails Blog</h1>
+  </div>
+
+  <center>
+    <% if current_user %>
+      <%= link_to '<button type="button">Create Post</button>'.html_safe, '/post/create' %>
+    <% else %>
+      <h3><%= link_to "Sign up", signup_path %> or
+          <%= link_to "log in", login_path %>
+          to create a post</h3>
+    <% end %>
+  </center>
+
+  <div class="posts" id="post_section">
+    <% @posts.each do |post| %>
+        <div class="post-view">
+          <div class="post-title">
+            <h2><%= link_to post.title, view_path(key: post.key) %></h2>
+          </div>
+          <div class="body-trunc">
+            <p>
+              <%= post.body[0..75] %>
+              <% if post.body.length > 75 %>
+                ...
+              <% end %>
+            </p>
+          </div>
+        </div>
+      <!--<div class="post-card">
+        <div class="title">
+          <h2><= post.title %></h2>
+        </div>
+        <div class="body-trunc">
+          <p><= post.body %></p>
+        </div>
+      </div>-->
+    <% end %>
+  </div>
+</div>
+</div>
